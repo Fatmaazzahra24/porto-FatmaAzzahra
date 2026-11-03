@@ -1,0 +1,208 @@
+@media (prefers-reduced-motion: no-preference) {
+  .motion-entered {
+    animation: section-arrive 650ms cubic-bezier(0.22, 1, 0.36, 1) both;
+    animation-delay: var(--motion-delay, 0ms);
+  }
+
+  .education-item.motion-entered,
+  .experience-item.motion-entered {
+    animation-duration: 750ms;
+  }
+
+  .identity-visual__asset {
+    animation: portrait-float 7s ease-in-out infinite;
+    transform-origin: 50% 25%;
+  }
+
+  .project-visual__image {
+    transition: transform 350ms ease;
+  }
+
+  .project-dialog[open] {
+    animation: dialog-arrive 220ms ease-out;
+  }
+
+  .hero__accent,
+  .hero__description,
+  .hero__actions,
+  .hero__connect {
+    animation: section-arrive 650ms ease-out both;
+  }
+
+  .hero__accent { animation-delay: 1.25s; }
+  .hero__description { animation-delay: 1.4s; }
+  .hero__actions { animation-delay: 1.55s; }
+  .hero__connect { animation-delay: 1.7s; }
+
+  .hero__focus .hero__accent,
+  .education__title.motion-entered .education__accent {
+    animation: accent-breathe 4s ease-in-out infinite;
+    transform-origin: left;
+  }
+
+  .experience-item.motion-entered:first-child .experience-item__timeline > span::after {
+    position: absolute;
+    inset: -5px;
+    border: 1px solid var(--color-pink-dusty);
+    border-radius: 50%;
+    content: '';
+    animation: timeline-pulse 3s ease-out infinite;
+  }
+
+  .typing-text[data-typing='true'] .typing-text__visual::after {
+    display: inline-block;
+    width: 2px;
+    height: 0.8em;
+    margin-left: 3px;
+    background: var(--color-pink-dusty);
+    content: '';
+    animation: caret-blink 650ms step-end infinite;
+  }
+
+  .typewriter__cursor::after {
+    display: inline-block;
+    width: 2px;
+    height: 0.8em;
+    margin-left: 4px;
+    background: var(--color-pink-dusty);
+    vertical-align: baseline;
+    content: '';
+    animation: caret-blink 650ms step-end infinite;
+  }
+
+  .project-gallery__slide {
+    animation: gallery-arrive 220ms ease-out;
+  }
+
+  .education-item__logo,
+  .skill-pill,
+  .experience-item__timeline > span {
+    transition: transform 220ms ease, box-shadow 220ms ease;
+  }
+
+  .social-link__icon {
+    transition: transform 200ms ease, color 200ms ease, background-color 200ms ease;
+  }
+
+  @media (hover: hover) {
+    .project-row:hover .project-visual__image {
+      transform: scale(1.025);
+    }
+
+    .social-link:hover .social-link__icon {
+      transform: translateY(-2px);
+    }
+
+    .identity-visual:hover .identity-visual__asset {
+      animation-play-state: paused;
+    }
+
+    .education-item:hover .education-item__logo {
+      transform: translateY(-3px) rotate(-2deg);
+    }
+
+    .experience-item:hover .experience-item__timeline > span {
+      transform: scale(1.15);
+      box-shadow: 0 0 0 5px var(--color-pink-soft);
+    }
+
+    .skill-pill:hover {
+      transform: translateY(-3px);
+    }
+
+    .project-gallery__thumbnails button:hover {
+      border-color: var(--color-pink-dusty);
+      background: var(--color-pink-soft);
+    }
+  }
+}
+
+.typewriter {
+  position: relative;
+}
+
+.typing-text {
+  display: inline-grid;
+  max-width: 100%;
+  vertical-align: bottom;
+}
+
+.typing-text__reserve,
+.typing-text__visual {
+  grid-area: 1 / 1;
+}
+
+.typing-text__reserve {
+  visibility: hidden;
+}
+
+.typing-text__visual {
+  min-width: 0;
+}
+
+.typing-text--loop .typing-text__reserve,
+.typing-text--loop .typing-text__visual {
+  white-space: nowrap;
+}
+
+.typewriter__reserve {
+  visibility: hidden;
+}
+
+.typewriter__text {
+  position: absolute;
+  inset: 0;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .typing-text__reserve {
+    visibility: visible;
+  }
+
+  .typing-text__reserve ~ .typing-text__reserve,
+  .typing-text__visual {
+    display: none;
+  }
+  .typewriter__reserve {
+    visibility: visible;
+  }
+
+  .typewriter__text {
+    display: none;
+  }
+}
+
+@keyframes section-arrive {
+  from { opacity: 0; transform: translateY(14px); }
+  to { opacity: 1; transform: translateY(0); }
+}
+
+@keyframes portrait-float {
+  0%, 100% { transform: translateY(0) rotate(-0.4deg); }
+  50% { transform: translateY(-5px) rotate(0.4deg); }
+}
+
+@keyframes dialog-arrive {
+  from { opacity: 0; transform: translateY(8px); }
+  to { opacity: 1; transform: translateY(0); }
+}
+
+@keyframes gallery-arrive {
+  from { opacity: 0.5; }
+  to { opacity: 1; }
+}
+
+@keyframes caret-blink {
+  0%, 100% { opacity: 1; }
+  50% { opacity: 0; }
+}
+
+@keyframes accent-breathe {
+  0%, 100% { transform: scaleX(1); opacity: 0.9; }
+  50% { transform: scaleX(0.72); opacity: 0.55; }
+}
+
+@keyframes timeline-pulse {
+  0% { transform: scale(0.7); opacity: 0.6; }
+  80%, 100% { transform: scale(1.5); opacity: 0; }
+}

@@ -1,0 +1,23 @@
+.app {
+  min-height: calc(100svh - var(--header-height));
+}
+
+.app:focus {
+  outline: none;
+}
+
+.skip-link {
+  position: fixed;
+  z-index: 20;
+  top: 12px;
+  left: 12px;
+  padding: 10px 16px;
+  transform: translateY(-160%);
+  border-radius: var(--radius-button);
+  color: var(--color-background);
+  background: var(--color-navy);
+}
+
+.skip-link:focus {
+  transform: translateY(0);
+}
