@@ -1,0 +1,82 @@
+name: Deploy portfolio to Coolify
+
+on:
+  push:
+    branches:
+      - main
+
+permissions:
+  contents: read
+
+jobs:
+  deploy:
+    name: Deploy main to production
+    runs-on: ubuntu-24.04
+    timeout-minutes: 5
+    env:
+      COOLIFY_WEBHOOK_SECRET: ${{ secrets.COOLIFY_WEBHOOK_SECRET }}
+      COOLIFY_WEBHOOK_URL: https://fatma.portofolio-ku.com/__deploy/github
+      COOLIFY_APPLICATION_UUID: v7zywezut752nri851jnkxve
+    steps:
+      - name: Send verified push event to Coolify
+        shell: bash
+        run: |
+          python3 - <<'PY'
+          import hashlib
+          import hmac
+          import json
+          import os
+          import time
+          import urllib.error
+          import urllib.request
+
+          with open(os.environ['GITHUB_EVENT_PATH'], encoding='utf-8') as source:
+              event = json.load(source)
+          repository = event['repository']['full_name']
+          if repository != 'Fatmaazzahra24/porto-FatmaAzzahra' or event.get('ref') != 'refs/heads/main':
+              raise SystemExit('This workflow deploys only this repository and main branch.')
+          if event.get('deleted'):
+              raise SystemExit('The production branch was deleted; no deployment requested.')
+          secret = os.environ.get('COOLIFY_WEBHOOK_SECRET', '')
+          if not secret:
+              raise SystemExit('COOLIFY_WEBHOOK_SECRET is not configured.')
+
+          # Send the push identity and SHA without committing the secret or
+          # depending on who pushed. Source is cloned and built by Coolify.
+          payload = json.dumps({
+              'ref': event['ref'],
+              'after': event['after'],
+              'repository': {'full_name': repository},
+              'commits': [],
+          }, separators=(',', ':')).encode('utf-8')
+          signature = 'sha256=' + hmac.new(secret.encode('utf-8'), payload, hashlib.sha256).hexdigest()
+          request = urllib.request.Request(
+              os.environ['COOLIFY_WEBHOOK_URL'], data=payload, method='POST',
+              headers={
+                  'Content-Type': 'application/json',
+                  'X-GitHub-Event': 'push',
+                  'X-GitHub-Delivery': os.environ['GITHUB_RUN_ID'] + '-' + os.environ['GITHUB_RUN_ATTEMPT'],
+                  'X-Hub-Signature-256': signature,
+                  'User-Agent': 'FatmaPortfolioDeployment',
+              },
+          )
+          for attempt in range(3):
+              try:
+                  with urllib.request.urlopen(request, timeout=45) as response:
+                      result = json.load(response)
+                  break
+              except urllib.error.HTTPError as error:
+                  if error.code == 429 and attempt < 2:
+                      time.sleep(30)
+                      continue
+                  raise SystemExit('Coolify webhook returned HTTP ' + str(error.code))
+          expected = os.environ['COOLIFY_APPLICATION_UUID']
+          queued = [row for row in result if row.get('status') == 'success' and row.get('application_uuid') == expected]
+          if not queued:
+              raise SystemExit('Coolify did not confirm a deployment for the expected application.')
+          deployment = queued[0]['deployment_uuid']
+          print('Deployment queued:', deployment, 'commit:', event['after'])
+          with open(os.environ['GITHUB_STEP_SUMMARY'], 'a', encoding='utf-8') as summary:
+              summary.write('Production deployment queued for commit `' + event['after'] + '`.\n\n')
+              summary.write('Website: https://fatma.portofolio-ku.com\n\nDeployment: `' + deployment + '`\n')
+          PY
