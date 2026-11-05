@@ -67,7 +67,7 @@ export const projects = [
     year: '2025–2026',
     category: 'Web Development & AI Integration',
     shortName: 'Yuk Sehat',
-    image: null,
+    images: ['/images/yuksehat1.png', '/images/yuksehat2.png'],
     summary: 'An interactive health triage application with AI-assisted questions, urgency categories, and consultation history.',
     technologies: ['React', 'FastAPI', 'PostgreSQL', 'Mistral AI'],
     overview: 'Yuk Sehat explores health complaints through interactive questions and combines rule-based checks with AI assistance to present urgency categories, consultation history, and a monitoring dashboard.',

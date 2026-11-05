@@ -8,6 +8,7 @@ import Contact from './sections/Contact.jsx';
 import usePageMotion from './hooks/usePageMotion.js';
 import './styles/app.css';
 import './styles/motion.css';
+import './styles/mobile.css';
 
 export default function App() {
   usePageMotion();

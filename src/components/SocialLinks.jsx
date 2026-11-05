@@ -31,6 +31,7 @@ export default function SocialLinks() {
           >
             <span className="social-link__icon"><SocialIcon id={id} /></span>
             <span className="social-link__text">{text || label}</span>
+            <span className="social-link__short" aria-hidden="true">{label}</span>
           </a>
         </li>
       ))}

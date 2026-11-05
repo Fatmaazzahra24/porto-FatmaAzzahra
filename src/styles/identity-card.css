@@ -177,6 +177,14 @@
   overflow: visible;
   aspect-ratio: 523 / 477;
   place-items: center;
+  animation: none;
+}
+
+.identity-visual__arrival,
+.identity-visual__pose {
+  display: block;
+  width: 100%;
+  transform-origin: 52% 15%;
 }
 
 .identity-visual__asset {
@@ -185,12 +193,36 @@
   object-fit: contain;
 }
 
+.identity-visual__interactive {
+  display: block;
+  width: 100%;
+  padding: 0;
+  border: 0;
+  border-radius: 16px;
+  background: transparent;
+  cursor: grab;
+  transform-origin: 52% 15%;
+  touch-action: pan-y pinch-zoom;
+  user-select: none;
+  -webkit-tap-highlight-color: transparent;
+}
+
+.identity-visual__interactive[data-state='pressed'],
+.identity-visual__interactive[data-state='dragging'] {
+  cursor: grabbing;
+}
+
+.identity-visual__asset {
+  pointer-events: none;
+  user-select: none;
+}
+
 @media (max-width: 800px) {
   .identity-visual.identity-visual--asset {
     position: absolute;
-    top: 20px;
+    top: 18px;
     right: 0;
-    width: 120px;
+    width: 138px;
     margin: 0;
   }
 

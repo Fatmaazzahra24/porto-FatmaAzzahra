@@ -7,6 +7,10 @@
   list-style: none;
 }
 
+.social-link__short {
+  display: none;
+}
+
 .social-link {
   display: inline-flex;
   align-items: center;

@@ -1,23 +1,12 @@
 import { UserRound } from 'lucide-react';
 import { profile } from '../data/profile.js';
 import { heroContent } from '../data/hero.js';
+import InteractiveIdCard from './InteractiveIdCard.jsx';
 import '../styles/identity-card.css';
 
 export default function IdentityCard() {
   if (heroContent.idCardUrl) {
-    return (
-      <figure className="identity-visual identity-visual--asset">
-        <img
-          className="identity-visual__asset"
-          src={heroContent.idCardUrl}
-          alt={`ID card and lanyard of ${profile.name}, ${heroContent.role}`}
-          width="523"
-          height="477"
-          fetchPriority="high"
-          decoding="async"
-        />
-      </figure>
-    );
+    return <InteractiveIdCard />;
   }
 
   return (
