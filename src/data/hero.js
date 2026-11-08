@@ -10,7 +10,7 @@ export const heroContent = {
 
 export const socialLinks = [
   { id: 'email', label: 'Email', text: 'fatmaazzahra24@gmail.com', href: 'mailto:fatmaazzahra24@gmail.com' },
-  { id: 'linkedin', label: 'LinkedIn', href: null },
+  { id: 'linkedin', label: 'LinkedIn', text: '/fatmaazzahra24', href: 'https://www.linkedin.com/in/fatmaazzahra24/' },
   { id: 'github', label: 'GitHub', text: '/Fatmaazzahra24', href: 'https://github.com/Fatmaazzahra24' },
 ];
 

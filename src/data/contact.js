@@ -7,7 +7,7 @@ export const contact = {
   credit: 'Designed & Built with care.',
   socials: [
     { id: 'email', label: 'Email', href: 'mailto:fatmaazzahra24@gmail.com' },
-    { id: 'linkedin', label: 'LinkedIn', href: null, icon: '/icons/contact/linkedin.svg' },
+    { id: 'linkedin', label: 'LinkedIn', href: 'https://www.linkedin.com/in/fatmaazzahra24/', icon: '/icons/contact/linkedin.svg' },
     { id: 'github', label: 'GitHub', href: 'https://github.com/Fatmaazzahra24', icon: '/icons/skills/github.svg' },
     { id: 'instagram', label: 'Instagram', href: 'https://www.instagram.com/zh25ra_/', icon: '/icons/contact/instagram.svg' },
   ],
