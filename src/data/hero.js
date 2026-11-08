@@ -3,7 +3,7 @@ export const heroContent = {
   interests: ['Software Quality Assurance', 'Information Systems Development', 'System Analysis'],
   description:
     'A Bachelor of Applied Science (D-IV) student in Business Information Systems at Politeknik Negeri Malang with an interest in Software Quality Assurance and information systems development. Familiar with the Software Development Life Cycle (SDLC), from problem identification and requirements analysis to design, development, integration, and testing.\n\nAccustomed to analyzing problems, preparing documentation systematically, and collaborating to ensure technology solutions meet requirements and quality standards.',
-  resumeUrl: '/documents/fatma-cv.pdf',
+  resumeUrl: '/documents/CV_fatma-update.pdf',
   portraitUrl: null,
   idCardUrl: '/images/fatma-id-card.png',
 };
